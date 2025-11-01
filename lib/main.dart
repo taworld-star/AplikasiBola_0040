@@ -26,7 +26,7 @@ class ArsenalApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
-        '/home': (context) => const HomePage(),
+        '/home': (context) =>  HomePage(),
       },
       debugShowCheckedModeBanner: false,
     );
