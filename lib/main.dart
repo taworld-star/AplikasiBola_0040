@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'registration_page.dart';
 
 void main() {
   runApp(const ArsenalApp());
@@ -11,7 +12,7 @@ class ArsenalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Arsenal FC',
+      title: 'Arsenal FC App',
       theme: ThemeData(
         primaryColor: const Color(0xFF0066CC),
         colorScheme: ColorScheme.fromSeed(
@@ -20,7 +21,12 @@ class ArsenalApp extends StatelessWidget {
         ),
       ),
 
-      home: const LoginPage(),  // This is the key change
+      initialRoute: '/register',
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/register': (context) => const RegistrationPage(),
+        //'/home': (context) => const HomePage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

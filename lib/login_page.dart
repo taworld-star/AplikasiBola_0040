@@ -19,10 +19,11 @@ class _LoginPageState extends State<LoginPage> {
       print('Email: ${_emailController.text}');
       print('Password: ${_passwordCtroller.text}');
 
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/home');  // Navigate to Home Page
     }
   }
-
+  
+  // Navigate to Registration Page
   void _navigateToRegister(){
     Navigator.pushReplacementNamed(context, '/register');
   }
