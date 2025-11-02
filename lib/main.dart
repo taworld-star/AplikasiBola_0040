@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
 import 'home_page.dart';
+import 'package:aplikasi_bola/addplayer_page.dart';
 
 void main() {
   runApp(const ArsenalApp());
@@ -22,11 +23,12 @@ class ArsenalApp extends StatelessWidget {
         ),
       ),
 
-      initialRoute: '/home',
+      initialRoute: '/add_player',
       routes: {
         '/': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
         '/home': (context) =>  HomePage(),
+        '/add_player': (context) => const AddplayerPage(),
       },
       debugShowCheckedModeBanner: false,
     );
