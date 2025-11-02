@@ -32,35 +32,35 @@ class HomePage extends StatelessWidget {
   void _navigateToPlayer(BuildContext context) {
     // Navigator.pushNamed(context, '/player_list'); // Example route
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigasi ke Player belum diimplementasikan')),
+      const SnackBar(content: Text('Player navigation has not been implemented yet')),
     );
   }
 
   void _navigateToJadwal(BuildContext context) {
     // Navigator.pushNamed(context, '/jadwal'); // Example route
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigasi ke Jadwal belum diimplementasikan')),
+      const SnackBar(content: Text('Match schedule navigation has not been implemented yet')),
     );
   }
 
   void _navigateToKlasemen(BuildContext context) {
     // Navigator.pushNamed(context, '/klasemen'); // Example route
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigasi ke Klasemen belum diimplementasikan')),
+      const SnackBar(content: Text('League standings navigation has not been implemented yet')),
     );
   }
 
   void _navigateToMerchandise(BuildContext context) {
     // Navigator.pushNamed(context, '/merchandise'); // Example route
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigasi ke Merchandise belum diimplementasikan')),
+      const SnackBar(content: Text('Merchandise navigation has not been implemented yet')),
     );
   }
 
   void _navigateToSettings(BuildContext context) {
     // Navigator.pushNamed(context, '/settings'); // Example route
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigasi ke Pengaturan belum diimplementasikan')),
+      const SnackBar(content: Text('Settings navigation has not been implemented yet')),
     );
   }
 
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Arsenal FC App'), // Matches the image
-        backgroundColor: Theme.of(context).primaryColor, // Uses the theme's primary color
+        backgroundColor: Theme.of(context).primaryColor, // Use the theme's primary color
         centerTitle: true, // Centers the title
         actions: [
           // Gear icon for settings
@@ -167,7 +167,7 @@ class HomePage extends StatelessWidget {
                 _buildMenuItem(context, Icons.shopping_bag_outlined, 'Merchandise', _navigateToMerchandise),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
 
             // --- Berita Terbaru Section ---
             Text(
@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                       right: index == newsItems.length - 1 ? 0 : 16,
                     ),
                     child: SizedBox(
-                      width: 250,
+                      width: 280,
                       child: _buildNewsCard(
                         context,
                         newsItems[index]['title']!,
@@ -200,7 +200,7 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(),
+            const SizedBox(height: 50),
           ],
         ),
       ),
@@ -229,7 +229,11 @@ class HomePage extends StatelessWidget {
   // Helper widget for news cards
   Widget _buildNewsCard(BuildContext context, String title, String content) {
     return Card(
-      margin: const EdgeInsets.all(8.0),
+     // margin: const EdgeInsets.all(8.0),
+     shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color: const Color.fromARGB(255, 176, 239, 255), // Light grey background for news cards
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -242,13 +246,16 @@ class HomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).primaryColor,
               ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8),
-            Text(
-              content,
-              style: TextStyle(fontSize: 12, color: Colors.grey[800]),
+            Expanded(
+              child: Text(
+                content,
+                style: TextStyle(fontSize: 12, color: Colors.grey[800]),
+              ),
             ),
-            // You could add an image here if the news had one
           ],
         ),
       ),
