@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
 import 'home_page.dart';
-import 'package:aplikasi_bola/addplayer_page.dart';
+import 'addplayer_page.dart';
+import 'saveplayer_page.dart';
 
 void main() {
   runApp(const ArsenalApp());
@@ -23,7 +24,7 @@ class ArsenalApp extends StatelessWidget {
         ),
       ),
 
-      initialRoute: '/save_player',
+      initialRoute: '/', 
       routes: {
         '/': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
@@ -33,7 +34,7 @@ class ArsenalApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
           if (args != null) {
-            return const AddplayerPage();
+            return  _savePlayerPage(playerData: args);
           } else {
             return const Scaffold(
               body: Center(

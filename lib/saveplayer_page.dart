@@ -1,28 +1,29 @@
 // lib/screens/detail_pemain_page.dart
 import 'package:flutter/material.dart';
 
-class DetailPemainPage extends StatelessWidget {
-  final Map<String, dynamic> playerData; // Data received from the previous screen
+class _savePlayerPage extends StatelessWidget {
+  final Map<String, dynamic> playerData;
 
-  const DetailPemainPage({Key? key, required this.playerData}) : super(key: key);
+  const _savePlayerPage({Key? key, required this.playerData}) : super(key: key);
 
   // Helper function to convert height from cm to meters and format it
   String _formatHeight(int heightCm) {
-    if (heightCm == 0) return '-'; // Handle case where height is not provided
+    if (heightCm == 0) return '-';
     double heightM = heightCm / 100.0;
-    return heightM.toStringAsFixed(2); // Format to 2 decimal places (e.g., 1.80)
+    return heightM.toStringAsFixed(2);
   }
 
   @override
   Widget build(BuildContext context) {
-    // Extract data safely, providing defaults if null
+    // --- CORRECTED DATA EXTRACTION ---
     final String nama = playerData['nama'] as String? ?? 'N/A';
-    final String? posisi = playerData['posisi'];
-    final String? nomorPunggung = playerData['nomorPunggung'];
-    final String? kewarganegaraan = playerData['kewarganegaraan'];
+    final String? posisi = playerData['posisi'] as String?; // Access from map
+    final String? nomorPunggung = playerData['nomorPunggung'] as String?; // Access from map
+    final String? kewarganegaraan = playerData['kewarganegaraan'] as String?; // Access from map
     final int usia = playerData['usia'] as int? ?? 0;
     final int tinggiBadanCm = playerData['tinggiBadanCm'] as int? ?? 0;
-    final String? jenisKelamin = playerData['jenisKelamin'];
+    final String? jenisKelamin = playerData['jenisKelamin'] as String?; // Access from map
+    // --- END OF CORRECTION ---
 
     return Scaffold(
       appBar: AppBar(
@@ -32,8 +33,7 @@ class DetailPemainPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            // Go back to the previous screen (Tambah Pemain)
-            Navigator.pop(context);
+            Navigator.pop(context); // Go back to the previous screen (Tambah Pemain)
           },
         ),
       ),
@@ -42,14 +42,14 @@ class DetailPemainPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Display Player Details
+            // Display Player Details using extracted data from map
             _buildDetailRow('Nama', nama),
-            _buildDetailRow('Posisi', posisi ?? '-'),
-            _buildDetailRow('Nomor Punggung', nomorPunggung ?? '-'),
-            _buildDetailRow('Kewarganegaraan', kewarganegaraan ?? '-'),
+            _buildDetailRow('Posisi', posisi ?? '-'), // Use extracted 'posisi'
+            _buildDetailRow('Nomor Punggung', nomorPunggung ?? '-'), // Use extracted 'nomorPunggung'
+            _buildDetailRow('Kewarganegaraan', kewarganegaraan ?? '-'), // Use extracted 'kewarganegaraan'
             _buildDetailRow('Usia', usia.toString()),
             _buildDetailRow('Tinggi Badan', _formatHeight(tinggiBadanCm)), // Formatted height
-            _buildDetailRow('Jenis Kelamin', jenisKelamin ?? '-'),
+            _buildDetailRow('Jenis Kelamin', jenisKelamin ?? '-'), // Use extracted 'jenisKelamin'
 
             const SizedBox(height: 40), // Spacing before buttons
 
@@ -57,17 +57,16 @@ class DetailPemainPage extends StatelessWidget {
             // Cancel Button
             SizedBox(
               width: double.infinity,
-              child: OutlinedButton( // Outlined button style like in the image
+              child: OutlinedButton(
                 onPressed: () {
-                  // As per PDF: "Tombol Cancel → mengembalikan pengguna ke halaman Tambah Pemain."
-                  Navigator.pop(context); // Simply go back
+                  Navigator.pop(context); // Go back to Tambah Pemain page
                 },
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  side: BorderSide(color: Theme.of(context).primaryColor, width: 1.5), // Outline color
+                  side: BorderSide(color: Theme.of(context).primaryColor, width: 1.5),
                 ),
                 child: Text(
                   'Cancel',
@@ -82,8 +81,6 @@ class DetailPemainPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // As per PDF: "Tombol Save → menutup semua halaman sebelumnya dan kembali ke Home."
-                  // Use pushNamedAndRemoveUntil to clear the navigation stack
                   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
@@ -91,7 +88,7 @@ class DetailPemainPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  backgroundColor: Theme.of(context).primaryColor, // Solid color button
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
                 child: const Text(
                   'Save',
@@ -110,21 +107,15 @@ class DetailPemainPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start of the row
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Label part
           SizedBox(
-            width: 150, // Fixed width for labels to align values
+            width: 150,
             child: Text(
               '$label:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[700],
-              ),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[700]),
             ),
           ),
-          // Value part - use Expanded to handle potentially long values
           Expanded(
             child: Text(
               value,

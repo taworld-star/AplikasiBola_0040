@@ -15,8 +15,9 @@ class _AddplayerPageState extends State<AddplayerPage> {
   final TextEditingController _jerseyNumberController = TextEditingController();
   final TextEditingController _nationalityController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController(); //in cm
-  
+  final TextEditingController _heightController =
+      TextEditingController(); //in cm
+
   String? _selectedPosition;
   String? _selectedNationality;
   String? _selectedGender;
@@ -29,7 +30,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
     'Gelandang Bertahan',
     'Penyerang',
     'Bek Sayap Kanan',
-    'Bek Sayap Kiri', 
+    'Bek Sayap Kiri',
   ];
 
   final List<String> _nationalities = [
@@ -45,29 +46,28 @@ class _AddplayerPageState extends State<AddplayerPage> {
     'Portugal',
   ];
 
-  void _savePlayer(){
+  void _savePlayer() {
     if (_formKey.currentState!.validate()) {
-      // Process data.
-      print('Nama: ${_nameController.text}');
-      print('Posisi: $_selectedPosition');
-      print('Nomor Punggung: ${_jerseyNumberController.text}');
-      print('Kebangsaan: $_selectedNationality');
-      print('Usia: ${_ageController.text}');
-      print('Tinggi: ${_heightController.text}');
-      print('Jenis Kelamin: $_selectedGender');
+      // Prepare player data
+      final playerData = {
+        'nama': _nameController.text,
+        'posisi': _selectedPosition,
+        'nomorPunggung': _jerseyNumberController.text,
+        'kewarganegaraan': _selectedNationality,
+        'usia': int.tryParse(_ageController.text) ?? 0,
+        'tinggiBadanCm': int.tryParse(_heightController.text) ?? 0, // tryparse to int
+        'jenisKelamin': _selectedGender,
+      };
 
-      Navigator.pushNamed(
-        context, 
-        '/home',
-        arguments: {
-          'nama': _nameController.text,
-          'posisi': _selectedPosition,
-          'nomorPunggung': _jerseyNumberController.text,
-          'kebangsaan': _selectedNationality,
-          'usia': int.tryParse(_ageController.text) ?? 0,
-          'tinggi': int.tryParse(_heightController.text) ?? 0, // tryparse to int
-          'jenisKelamin': _selectedGender,
-        }
+      // Navigate to SavePlayerPage with player data
+      Navigator.pushNamed(context, '/save_player', arguments: playerData);
+    } else {
+      // Show error message if validation fails
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Mohon periksa kembali data yang dimasukkan'),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }
@@ -91,8 +91,9 @@ class _AddplayerPageState extends State<AddplayerPage> {
         backgroundColor: const Color(0xFF0066CC),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), onPressed: () {
-            Navigator.pop(context);
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous screen
           },
         ),
       ),
@@ -106,10 +107,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
               children: <Widget>[
                 const Text(
                   'Masukkan detail pemain baru di bawah ini:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 TextFormField(
                   controller: _nameController,
@@ -126,7 +124,9 @@ class _AddplayerPageState extends State<AddplayerPage> {
                 DropdownButtonFormField<String>(
                   value: _selectedPosition,
                   hint: const Text('Pilih Posisi'),
-                  decoration: const InputDecoration(labelText: 'Pilih Posisi Pemain'),
+                  decoration: const InputDecoration(
+                    labelText: 'Pilih Posisi Pemain',
+                  ),
                   items: _positions.map((position) {
                     return DropdownMenuItem(
                       value: position,
@@ -149,7 +149,9 @@ class _AddplayerPageState extends State<AddplayerPage> {
 
                 TextFormField(
                   controller: _jerseyNumberController,
-                  decoration: const InputDecoration(labelText: 'Nomor Punggung'),
+                  decoration: const InputDecoration(
+                    labelText: 'Nomor Punggung',
+                  ),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -222,29 +224,28 @@ class _AddplayerPageState extends State<AddplayerPage> {
                 ),
                 const SizedBox(height: 16.0),
 
-                 Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Jenis Kelamin',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                     ),
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Radio<String>(
-                          value: 'Laki-laki', groupValue: _selectedGender,
+                          value: 'Laki-laki',
+                          groupValue: _selectedGender,
                           onChanged: (v) => setState(() => _selectedGender = v),
                           activeColor: Theme.of(context).primaryColor,
                         ),
                         Text('Laki-laki'),
                         const SizedBox(width: 20),
                         Radio<String>(
-                          value: 'Perempuan', groupValue: _selectedGender,
+                          value: 'Perempuan',
+                          groupValue: _selectedGender,
                           onChanged: (v) => setState(() => _selectedGender = v),
                           activeColor: Theme.of(context).primaryColor,
                         ),
@@ -254,13 +255,31 @@ class _AddplayerPageState extends State<AddplayerPage> {
                   ],
                 ),
                 const SizedBox(height: 30),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //     backgroundColor: const Color.fromARGB(255, 239, 242, 245),
+                //   ),
+                //   onPressed: _savePlayer,
+                //   child: const Text('Simpan'),
+
+                // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 239, 242, 245),
+                    backgroundColor: const Color(0xFF0066CC),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onPressed: _savePlayer,
-                  child: const Text('Simpan'),
-                  
+                  child: const Text(
+                    'Simpan',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
