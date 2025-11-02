@@ -31,9 +31,7 @@ class HomePage extends StatelessWidget {
   // Navigation functions (will be implemented later)
   void _navigateToPlayer(BuildContext context) {
     // Navigator.pushNamed(context, '/player_list'); // Example route
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Player navigation has not been implemented yet')),
-    );
+    Navigator.pushNamed(context, '/add_player');
   }
 
   void _navigateToJadwal(BuildContext context) {

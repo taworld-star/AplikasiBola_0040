@@ -16,19 +16,32 @@ class ArsenalApp extends StatelessWidget {
     return MaterialApp(
       title: 'Arsenal FC App',
       theme: ThemeData(
-        primaryColor: const Color(0xFF0066CC),
+        primaryColor: const Color.fromARGB(238, 223, 11, 3), // Arsenal Yellow
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0066CC),
-          primary: const Color(0xFF0066CC),
+          seedColor: const Color.fromARGB(255, 126, 124, 14), // untuk warna tulisan dan elemen lainnya
+          primary: const Color.fromARGB(255, 0, 0, 0), //unuk AppBar dan elemen utama
         ),
       ),
 
-      initialRoute: '/add_player',
+      initialRoute: '/save_player',
       routes: {
         '/': (context) => const LoginPage(),
         '/register': (context) => const RegistrationPage(),
         '/home': (context) =>  HomePage(),
         '/add_player': (context) => const AddplayerPage(),
+        '/save_player': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          if (args != null) {
+            return const AddplayerPage();
+          } else {
+            return const Scaffold(
+              body: Center(
+                child: Text('No player data provided.'),
+              ),
+            );
+          }
+        },
       },
       debugShowCheckedModeBanner: false,
     );
