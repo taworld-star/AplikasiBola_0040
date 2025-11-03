@@ -34,28 +34,28 @@ class HomePage extends StatelessWidget {
   }
 
   void _navigateToJadwal(BuildContext context) {
-    // Navigator.pushNamed(context, '/jadwal'); // Example route
+    // Navigator.pushNamed(context, '/jadwal'); 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Match schedule navigation has not been implemented yet')),
     );
   }
 
   void _navigateToKlasemen(BuildContext context) {
-    // Navigator.pushNamed(context, '/klasemen'); // Example route
+    // Navigator.pushNamed(context, '/klasemen'); 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('League standings navigation has not been implemented yet')),
     );
   }
 
   void _navigateToMerchandise(BuildContext context) {
-    // Navigator.pushNamed(context, '/merchandise'); // Example route
+    // Navigator.pushNamed(context, '/merchandise');
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Merchandise navigation has not been implemented yet')),
     );
   }
 
   void _navigateToSettings(BuildContext context) {
-    // Navigator.pushNamed(context, '/settings'); // Example route
+    // Navigator.pushNamed(context, '/settings'); 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Settings navigation has not been implemented yet')),
     );
@@ -67,7 +67,29 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Arsenal FC App'), // Matches the image
         backgroundColor: Theme.of(context).primaryColor, // Use the theme's primary color
-        centerTitle: true, // Centers the title
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            if (Navigator.canPop(context)) Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              radius: 18,
+              backgroundColor: Colors.white.withOpacity(0.12),
+              child: ClipOval(
+                child: Image.asset(
+                  'asset/images/arsenal.png',
+                  fit: BoxFit.cover,
+                  width: 28,
+                  height: 28,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.shield, size: 22, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+         // Centers the title
         actions: [
           // Gear icon for settings
           IconButton(
@@ -95,7 +117,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity, // Make container full width
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: const Color(0xFFE0F7FA), // Light blue background for match info, similar to image
+                color: const Color(0xFF9C824A), // Light blue background for match info, similar to image
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Column(
@@ -123,18 +145,18 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Tanggal: 09 November 2025', // Static data
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Waktu: 00:30 WIB', // Static data
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Lokasi: Stadium of Light', // Static data
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                 ],
               ),
@@ -204,7 +226,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Helper widget for menu items
+  // widget for menu items
   Widget _buildMenuItem(BuildContext context, IconData icon, String label, Function onTap) {
     return InkWell(
       onTap: () => onTap(context),
@@ -230,7 +252,7 @@ class HomePage extends StatelessWidget {
      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      color: const Color.fromARGB(255, 176, 239, 255), // Light grey background for news cards
+      color: const Color(0xFF9C824A), // Light grey background for news cards
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -250,7 +272,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Text(
                 content,
-                style: TextStyle(fontSize: 12, color: Colors.grey[800]),
+                style: TextStyle(fontSize: 12, color: Colors.black87),
               ),
             ),
           ],

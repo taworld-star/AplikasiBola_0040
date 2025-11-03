@@ -358,8 +358,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ElevatedButton(
                       onPressed: _register,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: const Color(0xFF9C824A),
                         padding: const EdgeInsets.symmetric(horizontal: 120.0),
+                        minimumSize: const Size.fromHeight(48), // Make button at least 48 high
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
