@@ -65,7 +65,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
       // Show error message if validation fails
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Mohon periksa kembali data yang dimasukkan'),
+          content: Text('Please check the input data.'),
           backgroundColor: Colors.red,
         ),
       );
