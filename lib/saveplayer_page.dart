@@ -1,10 +1,10 @@
 // lib/screens/detail_pemain_page.dart
 import 'package:flutter/material.dart';
 
-class _savePlayerPage extends StatelessWidget {
+class SavePlayerPage extends StatelessWidget {
   final Map<String, dynamic> playerData;
 
-  const _savePlayerPage({Key? key, required this.playerData}) : super(key: key);
+  const SavePlayerPage({Key? key, required this.playerData}) : super(key: key);
 
   // Helper function to convert height from cm to meters and format it
   String _formatHeight(int heightCm) {

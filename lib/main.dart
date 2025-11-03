@@ -17,10 +17,10 @@ class ArsenalApp extends StatelessWidget {
     return MaterialApp(
       title: 'Arsenal FC App',
       theme: ThemeData(
-        primaryColor: const Color.fromARGB(238, 223, 11, 3), // Arsenal Yellow
+        primaryColor: const Color(0xFFEF0107), //Red
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 126, 124, 14), // untuk warna tulisan dan elemen lainnya
-          primary: const Color.fromARGB(255, 0, 0, 0), //unuk AppBar dan elemen utama
+          seedColor: const Color(0xFF9C824A), // untuk warna tulisan dan elemen lainnya
+          primary: const Color(0xFF000000), //unuk AppBar dan elemen utama
         ),
       ),
 
@@ -34,7 +34,7 @@ class ArsenalApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
           if (args != null) {
-            return  _savePlayerPage(playerData: args);
+            return  SavePlayerPage(playerData: args);
           } else {
             return const Scaffold(
               body: Center(
