@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String? email;
+  final String? password;
+
+  const LoginPage({super.key, this.email, this.password});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -12,6 +15,19 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordCtroller = TextEditingController();
   bool _obscurePassword = true;
+
+  @override
+  void initState() { // Added initState to handle received email and password
+    super.initState();
+    if (widget.email != null && widget.password != null) {
+      _emailController.text = widget.email!;
+      _passwordCtroller.text = widget.password!;
+    }
+
+    print("Email diterima: ${widget.email}");
+    print("Password diterima: ${widget.password}");
+  }
+
 
   void _login(){
     if (_formKey.currentState!.validate()) {

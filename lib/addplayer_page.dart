@@ -50,13 +50,13 @@ class _AddplayerPageState extends State<AddplayerPage> {
     if (_formKey.currentState!.validate()) {
       // Prepare player data
       final playerData = {
-        'nama': _nameController.text,
-        'posisi': _selectedPosition,
-        'nomorPunggung': _jerseyNumberController.text,
-        'kewarganegaraan': _selectedNationality,
-        'usia': int.tryParse(_ageController.text) ?? 0,
-        'tinggiBadanCm': int.tryParse(_heightController.text) ?? 0, // tryparse to int
-        'jenisKelamin': _selectedGender,
+        'name': _nameController.text,
+        'position': _selectedPosition,
+        'jerseyNumber': _jerseyNumberController.text,
+        'nationality': _selectedNationality,
+        'age': int.tryParse(_ageController.text) ?? 0,
+        'heightCm': int.tryParse(_heightController.text) ?? 0, // tryparse to int
+        'gender': _selectedGender,
       };
 
       // Navigate to SavePlayerPage with player data
@@ -87,7 +87,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tambah Pemain Baru'),
+        title: const Text('Add New Player'),
         backgroundColor: const Color(0xFFEF0107),
         centerTitle: true,
         leading: IconButton(
@@ -106,15 +106,15 @@ class _AddplayerPageState extends State<AddplayerPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 const Text(
-                  'Masukkan detail pemain baru di bawah ini:',
+                  'Enter Player Details',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Nama'),
+                  decoration: const InputDecoration(labelText: 'Name'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Nama tidak boleh kosong';
+                      return 'Name cannot be empty';
                     }
                     return null;
                   },
@@ -123,9 +123,9 @@ class _AddplayerPageState extends State<AddplayerPage> {
 
                 DropdownButtonFormField<String>(
                   value: _selectedPosition,
-                  hint: const Text('Pilih Posisi'),
+                  hint: const Text('Choose Position'),
                   decoration: const InputDecoration(
-                    labelText: 'Pilih Posisi Pemain',
+                    labelText: 'Choose Player Position',
                   ),
                   items: _positions.map((position) {
                     return DropdownMenuItem(
@@ -140,7 +140,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
                   },
                   validator: (value) {
                     if (value == null) {
-                      return 'Posisi tidak boleh kosong';
+                      return 'Position cannot be empty';
                     }
                     return null;
                   },
@@ -150,16 +150,16 @@ class _AddplayerPageState extends State<AddplayerPage> {
                 TextFormField(
                   controller: _jerseyNumberController,
                   decoration: const InputDecoration(
-                    labelText: 'Nomor Punggung',
+                    labelText: 'Jersey Number',
                   ),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Nomor punggung tidak boleh kosong';
+                      return 'Jersey number cannot be empty';
                     }
                     int? num = int.tryParse(value);
                     if (num == null || num < 1 || num > 99) {
-                      return 'Nomor punggung harus berupa angka antara 1 dan 99';
+                      return 'Jersey number must be a number between 1 and 99';
                     }
                     return null;
                   },
@@ -168,8 +168,8 @@ class _AddplayerPageState extends State<AddplayerPage> {
 
                 DropdownButtonFormField<String>(
                   value: _selectedNationality,
-                  hint: const Text('Pilih Kebangsaan'),
-                  decoration: const InputDecoration(labelText: 'Kebangsaan'),
+                  hint: const Text('Choose Nationality'),
+                  decoration: const InputDecoration(labelText: 'Nationality'),
                   items: _nationalities.map((nationality) {
                     return DropdownMenuItem(
                       value: nationality,
@@ -183,7 +183,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
                   },
                   validator: (value) {
                     if (value == null) {
-                      return 'Kebangsaan tidak boleh kosong';
+                      return 'Nationality cannot be empty';
                     }
                     return null;
                   },
@@ -192,15 +192,15 @@ class _AddplayerPageState extends State<AddplayerPage> {
 
                 TextFormField(
                   controller: _ageController,
-                  decoration: const InputDecoration(labelText: 'Usia'),
+                  decoration: const InputDecoration(labelText: 'Age'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Usia tidak boleh kosong';
+                      return 'Age cannot be empty';
                     }
                     int? age = int.tryParse(value);
                     if (age == null || age < 10 || age > 50) {
-                      return 'Usia harus antara 10 dan 50 tahun';
+                      return 'Age must be between 10 and 50 years';
                     }
                     return null;
                   },
@@ -209,15 +209,15 @@ class _AddplayerPageState extends State<AddplayerPage> {
 
                 TextFormField(
                   controller: _heightController,
-                  decoration: const InputDecoration(labelText: 'Tinggi (cm)'),
+                  decoration: const InputDecoration(labelText: 'Height (cm)'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Tinggi tidak boleh kosong';
+                      return 'Height cannot be empty';
                     }
                     int? height = int.tryParse(value);
                     if (height == null || height < 100 || height > 250) {
-                      return 'Tinggi badan harus antara 100 cm sampai 250 cm';
+                      return 'Height must be between 100 cm and 250 cm';
                     }
                     return null;
                   },
@@ -228,7 +228,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Jenis Kelamin',
+                      'Gender',
                       style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                     ),
                     const SizedBox(height: 8),
@@ -236,20 +236,20 @@ class _AddplayerPageState extends State<AddplayerPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Radio<String>(
-                          value: 'Laki-laki',
+                          value: 'Male',
                           groupValue: _selectedGender,
                           onChanged: (v) => setState(() => _selectedGender = v),
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text('Laki-laki'),
+                        Text('Male'),
                         const SizedBox(width: 20),
                         Radio<String>(
-                          value: 'Perempuan',
+                          value: 'Female',
                           groupValue: _selectedGender,
                           onChanged: (v) => setState(() => _selectedGender = v),
                           activeColor: Theme.of(context).primaryColor,
                         ),
-                        Text('Perempuan'),
+                        Text('Female'),
                       ],
                     ),
                   ],
@@ -273,7 +273,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
                   ),
                   onPressed: _savePlayer,
                   child: const Text(
-                    'Simpan',
+                    'Save',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

@@ -28,9 +28,8 @@ class HomePage extends StatelessWidget {
   ];
   // --- End of Dummy News Data ---
 
-  // Navigation functions (will be implemented later)
+  // Navigation functions to add player page
   void _navigateToPlayer(BuildContext context) {
-    // Navigator.pushNamed(context, '/player_list'); // Example route
     Navigator.pushNamed(context, '/add_player');
   }
 

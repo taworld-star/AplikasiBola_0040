@@ -16,18 +16,18 @@ class SavePlayerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // --- CORRECTED DATA EXTRACTION ---
-    final String nama = playerData['nama'] as String? ?? 'N/A';
-    final String? posisi = playerData['posisi'] as String?; // Access from map
-    final String? nomorPunggung = playerData['nomorPunggung'] as String?; // Access from map
-    final String? kewarganegaraan = playerData['kewarganegaraan'] as String?; // Access from map
-    final int usia = playerData['usia'] as int? ?? 0;
-    final int tinggiBadanCm = playerData['tinggiBadanCm'] as int? ?? 0;
-    final String? jenisKelamin = playerData['jenisKelamin'] as String?; // Access from map
+    final String nama = playerData['name'] as String? ?? 'N/A';
+    final String? posisi = playerData['position'] as String?; // Access from map
+    final String? nomorPunggung = playerData['jerseyNumber'] as String?; // Access from map
+    final String? kewarganegaraan = playerData['nationality'] as String?; // Access from map
+    final int usia = playerData['age'] as int? ?? 0;
+    final int tinggiBadanCm = playerData['heightCm'] as int? ?? 0;
+    final String? jenisKelamin = playerData['gender'] as String?; // Access from map
     // --- END OF CORRECTION ---
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Pemain'),
+        title: const Text('Player Details'),
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         leading: IconButton(
@@ -43,13 +43,13 @@ class SavePlayerPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Display Player Details using extracted data from map
-            _buildDetailRow('Nama', nama),
-            _buildDetailRow('Posisi', posisi ?? '-'), // Use extracted 'posisi'
-            _buildDetailRow('Nomor Punggung', nomorPunggung ?? '-'), // Use extracted 'nomorPunggung'
-            _buildDetailRow('Kewarganegaraan', kewarganegaraan ?? '-'), // Use extracted 'kewarganegaraan'
-            _buildDetailRow('Usia', usia.toString()),
-            _buildDetailRow('Tinggi Badan', _formatHeight(tinggiBadanCm)), // Formatted height
-            _buildDetailRow('Jenis Kelamin', jenisKelamin ?? '-'), // Use extracted 'jenisKelamin'
+            _buildDetailRow('Name', nama),
+            _buildDetailRow('Position', posisi ?? '-'), // Use extracted 'posisi'
+            _buildDetailRow('Jersey Number', nomorPunggung ?? '-'), // Use extracted 'nomorPunggung'
+            _buildDetailRow('Nationality', kewarganegaraan ?? '-'), // Use extracted 'kewarganegaraan'
+            _buildDetailRow('Age', usia.toString()),
+            _buildDetailRow('Height', _formatHeight(tinggiBadanCm)), // Formatted height
+            _buildDetailRow('Gender', jenisKelamin ?? '-'), // Use extracted 'jenisKelamin'
 
             const SizedBox(height: 40), // Spacing before buttons
 
