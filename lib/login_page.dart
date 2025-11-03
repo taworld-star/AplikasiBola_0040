@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.grey[600],
+                  color: const Color.fromARGB(255, 0, 0, 0), //untuk bagian subjudul
                 ),
               ),
               const SizedBox(
