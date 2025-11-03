@@ -10,7 +10,7 @@ class SavePlayerPage extends StatelessWidget {
   String _formatHeight(int heightCm) {
     if (heightCm == 0) return '-';
     double heightM = heightCm / 100.0;
-    return heightM.toStringAsFixed(2);
+    return '${heightM.toStringAsFixed(2)} meter';
   }
 
   @override

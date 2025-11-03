@@ -88,7 +88,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tambah Pemain Baru'),
-        backgroundColor: const Color(0xFF0066CC),
+        backgroundColor: const Color(0xFFEF0107),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -265,7 +265,7 @@ class _AddplayerPageState extends State<AddplayerPage> {
                 // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0066CC),
+                    backgroundColor: const Color(0xFFEF0107),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
